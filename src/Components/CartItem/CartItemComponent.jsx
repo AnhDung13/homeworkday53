@@ -10,10 +10,12 @@ import {
 } from "../../redux/cartSlice";
 import { toast } from "react-toastify";
 import CheckoutComponent from "./CheckoutComponent";
+import { useNavigate } from "react-router-dom";
 
 export default function CartItemComponent() {
   const { Title } = Typography;
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { cart } = useSelector((state) => state.cart);
   const handleIncrease = (product) => {
     dispatch(increaseAmount(product));
@@ -56,42 +58,48 @@ export default function CartItemComponent() {
       ) : (
         <>
           {cart.map((item) => (
-            <a href={"/product/" + item._id}>
-              <Card key={item._id}>
-                <Space size="large">
-                  <Image src={item.image} preview={false} />
+            <Card key={item._id}>
+              <Space size="large">
+                <a>
+                  <Image
+                    src={item.image}
+                    preview={false}
+                    onClick={() => {
+                      navigate(`/product/${item._id}`);
+                    }}
+                  />
+                </a>
+                <div>
                   <div>
-                    <div>
-                      <Space>
-                        <span className="text-danger fs-5">{item.brand}</span>
-                        <span className="text fs-5">{item.name}</span>
-                      </Space>
-                      <Title level={2}>${fomartPrice(item.price)}</Title>
-                      <Title level={2}>Còn lại {item.quantity}</Title>
-                    </div>
+                    <Space>
+                      <span className="text-danger fs-5">{item.brand}</span>
+                      <span className="text fs-5">{item.name}</span>
+                    </Space>
+                    <Title level={2}>${fomartPrice(item.price)}</Title>
+                    <Title level={2}>Còn lại {item.quantity}</Title>
                   </div>
+                </div>
+              </Space>
+              <Flex justify="space-between" align="center" className="mt-4">
+                <div>
+                  <Button onClick={() => handleDecrease(item)}>-</Button>
+                  <Button type="text">{item.amount}</Button>
+                  <Button onClick={() => handleIncrease(item)}>+</Button>
+                </div>
+                <Space align="center">
+                  <Title style={{ margin: 0 }} level={1}>
+                    ${fomartPrice(item.price * item.amount)}
+                  </Title>
+                  <Button
+                    className="px-3 py-4"
+                    danger
+                    onClick={() => handleRemove(item)}
+                  >
+                    {trashcan}
+                  </Button>
                 </Space>
-                <Flex justify="space-between" align="center" className="mt-4">
-                  <div>
-                    <Button onClick={() => handleDecrease(item)}>-</Button>
-                    <Button type="text">{item.amount}</Button>
-                    <Button onClick={() => handleIncrease(item)}>+</Button>
-                  </div>
-                  <Space align="center">
-                    <Title style={{ margin: 0 }} level={1}>
-                      ${fomartPrice(item.price * item.amount)}
-                    </Title>
-                    <Button
-                      className="px-3 py-4"
-                      danger
-                      onClick={() => handleRemove(item)}
-                    >
-                      {trashcan}
-                    </Button>
-                  </Space>
-                </Flex>
-              </Card>
-            </a>
+              </Flex>
+            </Card>
           ))}
           <CheckoutComponent cart={cart} />
         </>

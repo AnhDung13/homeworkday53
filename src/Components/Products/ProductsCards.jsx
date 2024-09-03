@@ -6,8 +6,10 @@ import ReactLoading from "react-loading";
 import { useDispatch } from "react-redux";
 import { addCart } from "../../redux/cartSlice";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 export default function ProductsCards({ products, isLoading }) {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const addToCart = (product) => {
     const tmp = { ...product };
     tmp.amount = 1;
@@ -37,8 +39,14 @@ export default function ProductsCards({ products, isLoading }) {
                   position: "relative",
                 }}
               >
-                <a href={"/product/" + product._id}>
-                  <Image src={product.image} preview={false}></Image>
+                <a>
+                  <Image
+                    src={product.image}
+                    preview={false}
+                    onClick={() => {
+                      navigate(`/product/${product._id}`);
+                    }}
+                  ></Image>
                 </a>
                 <Title
                   level={4}

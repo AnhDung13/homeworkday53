@@ -3,6 +3,7 @@ import { Header } from "antd/es/layout/layout";
 import React, { useEffect, useState } from "react";
 import { handbag } from "../../svg/icon";
 import { useSelector } from "react-redux";
+import { Navigate, useNavigate } from "react-router-dom";
 const headerStyle = {
   background: "#252b48",
   position: "fixed",
@@ -17,6 +18,7 @@ const headerStyle = {
 export default function HeaderComponent() {
   const { cart } = useSelector((state) => state.cart);
   const [productCount, setProductCount] = useState(cart.length);
+  const navigate = useNavigate();
   useEffect(() => {
     setProductCount(cart.length);
   }, [cart.length]);
@@ -34,7 +36,12 @@ export default function HeaderComponent() {
           />
         </a>
         <Badge count={productCount}>
-          <Button type="link" href="/cart">
+          <Button
+            type="link"
+            onClick={() => {
+              navigate("/cart");
+            }}
+          >
             {handbag}
           </Button>
         </Badge>
