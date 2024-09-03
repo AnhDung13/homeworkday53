@@ -30,40 +30,40 @@ export default function ProductsCards({ products, isLoading }) {
         <>
           {products.map((product) => (
             <div className="col-3 mb-4" key={product._id}>
-              <a href={"/product/" + product._id}>
-                <Card
+              <Card
+                style={{
+                  textAlign: "center",
+                  height: "100%",
+                  position: "relative",
+                }}
+              >
+                <a href={"/product/" + product._id}>
+                  <Image src={product.image} preview={false}></Image>
+                </a>
+                <Title
+                  level={4}
+                  style={{ fontWeight: "bold", margin: "20px 0 40px" }}
+                >
+                  {product.name}
+                </Title>
+                <Flex
+                  justify="space-around"
+                  align="center"
                   style={{
-                    textAlign: "center",
-                    height: "100%",
-                    position: "relative",
+                    position: "absolute",
+                    bottom: 0,
+                    left: 0,
+                    width: "100%",
                   }}
                 >
-                  <Image src={product.image} preview={false}></Image>
-                  <Title
-                    level={4}
-                    style={{ fontWeight: "bold", margin: "20px 0 40px" }}
-                  >
-                    {product.name}
+                  <Title level={3} style={{ fontWeight: "bold" }}>
+                    ${fomartPrice(product.price)}
                   </Title>
-                  <Flex
-                    justify="space-around"
-                    align="center"
-                    style={{
-                      position: "absolute",
-                      bottom: 0,
-                      left: 0,
-                      width: "100%",
-                    }}
-                  >
-                    <Title level={3} style={{ fontWeight: "bold" }}>
-                      ${fomartPrice(product.price)}
-                    </Title>
-                    <button className="btn" onClick={() => addToCart(product)}>
-                      {cart}
-                    </button>
-                  </Flex>
-                </Card>
-              </a>
+                  <button className="btn" onClick={() => addToCart(product)}>
+                    {cart}
+                  </button>
+                </Flex>
+              </Card>
             </div>
           ))}
         </>
