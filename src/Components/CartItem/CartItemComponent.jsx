@@ -56,42 +56,44 @@ export default function CartItemComponent() {
       ) : (
         <>
           {cart.map((item) => (
-            <Card key={item._id}>
-              <Space size="large">
-                <a href={"/product/" + item._id}>
-                  <Image src={item.image} preview={false} />
-                </a>
-                <div>
+            <a href={"/product/" + item._id}>
+              <Card key={item._id}>
+                <Space size="large">
+                  <a href={"/product/" + item._id}>
+                    <Image src={item.image} preview={false} />
+                  </a>
                   <div>
-                    <Space>
-                      <span className="text-danger fs-5">{item.brand}</span>
-                      <span className="text fs-5">{item.name}</span>
-                    </Space>
-                    <Title level={2}>${fomartPrice(item.price)}</Title>
-                    <Title level={2}>Còn lại {item.quantity}</Title>
+                    <div>
+                      <Space>
+                        <span className="text-danger fs-5">{item.brand}</span>
+                        <span className="text fs-5">{item.name}</span>
+                      </Space>
+                      <Title level={2}>${fomartPrice(item.price)}</Title>
+                      <Title level={2}>Còn lại {item.quantity}</Title>
+                    </div>
                   </div>
-                </div>
-              </Space>
-              <Flex justify="space-between" align="center" className="mt-4">
-                <div>
-                  <Button onClick={() => handleDecrease(item)}>-</Button>
-                  <Button type="text">{item.amount}</Button>
-                  <Button onClick={() => handleIncrease(item)}>+</Button>
-                </div>
-                <Space align="center">
-                  <Title style={{ margin: 0 }} level={1}>
-                    ${fomartPrice(item.price * item.amount)}
-                  </Title>
-                  <Button
-                    className="px-3 py-4"
-                    danger
-                    onClick={() => handleRemove(item)}
-                  >
-                    {trashcan}
-                  </Button>
                 </Space>
-              </Flex>
-            </Card>
+                <Flex justify="space-between" align="center" className="mt-4">
+                  <div>
+                    <Button onClick={() => handleDecrease(item)}>-</Button>
+                    <Button type="text">{item.amount}</Button>
+                    <Button onClick={() => handleIncrease(item)}>+</Button>
+                  </div>
+                  <Space align="center">
+                    <Title style={{ margin: 0 }} level={1}>
+                      ${fomartPrice(item.price * item.amount)}
+                    </Title>
+                    <Button
+                      className="px-3 py-4"
+                      danger
+                      onClick={() => handleRemove(item)}
+                    >
+                      {trashcan}
+                    </Button>
+                  </Space>
+                </Flex>
+              </Card>
+            </a>
           ))}
           <CheckoutComponent cart={cart} />
         </>

@@ -1,5 +1,6 @@
 import CartPage from "../Page/Cart/CartPage";
 import HomePage from "../Page/Home/HomePage";
+import ProductDetailPage from "../Page/ProductDetail/ProductDetailPage";
 
 export const routes = [
   {
@@ -12,6 +13,6 @@ export const routes = [
   },
   {
     path: "/product/:id",
-    component: "",
+    component: <ProductDetailPage />,
   },
 ];

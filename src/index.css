@@ -4,3 +4,6 @@ body {
   padding: 64px;
   overflow: hidden auto;
 }
+a {
+  text-decoration: none !important;
+}
