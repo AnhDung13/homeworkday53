@@ -59,9 +59,7 @@ export default function CartItemComponent() {
             <a href={"/product/" + item._id}>
               <Card key={item._id}>
                 <Space size="large">
-                  <a href={"/product/" + item._id}>
-                    <Image src={item.image} preview={false} />
-                  </a>
+                  <Image src={item.image} preview={false} />
                   <div>
                     <div>
                       <Space>
