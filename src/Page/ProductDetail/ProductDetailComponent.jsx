@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { api } from "../../config/API";
+import { api } from "../../constance/API";
 import { Button, Card, Image, Space, Typography } from "antd";
 import { fomartPrice } from "../../ultis/ultis";
 import { useDispatch } from "react-redux";

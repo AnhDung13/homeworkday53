@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { handbag } from "../../svg/icon";
 import { useSelector } from "react-redux";
 import { Navigate, useNavigate } from "react-router-dom";
+import { productCount } from "../../ultis/ultis";
 const headerStyle = {
   background: "#252b48",
   position: "fixed",
@@ -17,11 +18,7 @@ const headerStyle = {
 };
 export default function HeaderComponent() {
   const { cart } = useSelector((state) => state.cart);
-  const [productCount, setProductCount] = useState(cart.length);
   const navigate = useNavigate();
-  useEffect(() => {
-    setProductCount(cart.length);
-  }, [cart.length]);
   return (
     <Header style={headerStyle}>
       <Flex justify="space-between" align="center">
@@ -35,7 +32,7 @@ export default function HeaderComponent() {
             alt=""
           />
         </a>
-        <Badge count={productCount}>
+        <Badge count={productCount(cart)}>
           <Button
             type="link"
             onClick={() => {

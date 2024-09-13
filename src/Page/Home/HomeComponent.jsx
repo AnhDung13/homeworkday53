@@ -1,33 +1,19 @@
 import { Typography } from "antd";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import ProductsCards from "../../Components/Products/ProductsCards";
-import axios from "axios";
 import PaginationComponent from "../../Components/Pagination/PaginationComponent";
-import { api } from "../../config/API";
-
+import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchProducts } from "../../redux/productSlice";
+import ReactLoading from "react-loading";
 export default function HomeComponent() {
-  const [products, setProducts] = useState([]);
-  const [totalPage, setTotalPage] = useState(0);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [isLoading, setIsLoading] = useState(false);
   const { Title } = Typography;
-
-  const getProduct = async (page) => {
-    setIsLoading(true);
-    const res = await axios.get(api, {
-      params: {
-        page,
-        limit: 20,
-      },
-    });
-    setProducts(res.data.data.listProduct);
-    setTotalPage(res.data.data.totalPage);
-    setIsLoading(false);
-  };
+  const { page } = useParams();
+  const { isLoading } = useSelector((state) => state.products);
+  const dispatch = useDispatch();
   useEffect(() => {
-    getProduct(currentPage);
-  }, [currentPage]);
-
+    dispatch(fetchProducts(page));
+  }, [page]);
   return (
     <>
       <Title
@@ -38,12 +24,17 @@ export default function HomeComponent() {
       </Title>
       <div className="container mx-auto">
         <div className="row">
-          <ProductsCards products={products} isLoading={isLoading} />
+          {isLoading ? (
+            <ReactLoading
+              type="spin"
+              color="#000"
+              className="mx-auto d-flex align-items-center"
+            />
+          ) : (
+            <ProductsCards />
+          )}
         </div>
-        <PaginationComponent
-          totalPage={totalPage}
-          setCurrentPage={setCurrentPage}
-        />
+        <PaginationComponent currentPage={page} />
       </div>
     </>
   );

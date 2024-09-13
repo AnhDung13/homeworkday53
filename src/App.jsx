@@ -3,7 +3,16 @@ import HomePage from "./Page/Home/HomePage";
 import Routing from "./routes/Routing";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-toastify/ReactToastify.min.css";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { fetchProducts } from "./redux/productSlice";
+import { useParams } from "react-router-dom";
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchProducts());
+  }, []);
   return (
     <>
       <Routing>

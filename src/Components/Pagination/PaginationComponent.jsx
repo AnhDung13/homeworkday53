@@ -1,17 +1,19 @@
 import { Pagination } from "antd";
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchProducts } from "../../redux/productSlice";
+import { useNavigate } from "react-router-dom";
 
-export default function PaginationComponent({ totalPage, setCurrentPage }) {
+export default function PaginationComponent({ currentPage }) {
+  const { totalPage } = useSelector((state) => state.products);
+  const navigate = useNavigate();
   const handleChange = (page) => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-    setCurrentPage(page);
+    navigate(`/products/page/${page}`);
   };
   return (
     <Pagination
       defaultCurrent={1}
+      current={currentPage}
       total={totalPage * 20}
       pageSize={20}
       showSizeChanger={false}

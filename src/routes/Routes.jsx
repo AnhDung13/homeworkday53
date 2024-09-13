@@ -8,6 +8,10 @@ export const routes = [
     component: <HomePage />,
   },
   {
+    path: "products/page/:page",
+    component: <HomePage />,
+  },
+  {
     path: "/cart",
     component: <CartPage />,
   },
