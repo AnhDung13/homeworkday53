@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { findIndex } from "../ultis/ultis";
+import { findIndex } from "../utils/utils";
 import { toast } from "react-toastify";
 
 const initialState = {

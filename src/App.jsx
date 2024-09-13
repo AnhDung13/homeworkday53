@@ -6,10 +6,8 @@ import "react-toastify/ReactToastify.min.css";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { fetchProducts } from "./redux/productSlice";
-import { useParams } from "react-router-dom";
 function App() {
   const dispatch = useDispatch();
-
   useEffect(() => {
     dispatch(fetchProducts());
   }, []);

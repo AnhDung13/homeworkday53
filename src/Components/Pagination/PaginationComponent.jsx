@@ -1,7 +1,6 @@
 import { Pagination } from "antd";
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchProducts } from "../../redux/productSlice";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 export default function PaginationComponent({ currentPage }) {

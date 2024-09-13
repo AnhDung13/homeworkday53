@@ -1,7 +1,7 @@
 import { Button, Card, Flex, Image, Layout, Space, Typography } from "antd";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fomartPrice } from "../../ultis/ultis";
+import { fomartPrice } from "../../utils/utils";
 import { trashcan } from "../../svg/icon";
 import {
   decreaseAmount,

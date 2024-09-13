@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { routes } from "./Routes";
 
 export default function Routing() {
@@ -9,6 +9,7 @@ export default function Routing() {
         {routes.map((route, index) => (
           <Route key={index} path={route.path} element={route.component} />
         ))}
+        <Route path="*" element={<Navigate to="/products/page/1" replace />} />
       </Routes>
     </BrowserRouter>
   );

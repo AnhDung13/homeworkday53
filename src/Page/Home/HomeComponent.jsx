@@ -23,18 +23,20 @@ export default function HomeComponent() {
         PRODUCTS
       </Title>
       <div className="container mx-auto">
-        <div className="row">
-          {isLoading ? (
-            <ReactLoading
-              type="spin"
-              color="#000"
-              className="mx-auto d-flex align-items-center"
-            />
-          ) : (
-            <ProductsCards />
-          )}
-        </div>
-        <PaginationComponent currentPage={page} />
+        {isLoading ? (
+          <ReactLoading
+            type="spin"
+            color="#000"
+            className="mx-auto d-flex align-items-center"
+          />
+        ) : (
+          <>
+            <div className="row">
+              <ProductsCards />
+            </div>
+            <PaginationComponent currentPage={page} />
+          </>
+        )}
       </div>
     </>
   );

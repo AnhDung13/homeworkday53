@@ -35,9 +35,6 @@ export const fetchProducts = createAsyncThunk(
           limit: 20,
         },
       });
-      window.scrollTo({
-        top: 0,
-      });
       const data = {
         products: res.data.data.listProduct,
         totalPage: res.data.data.totalPage,

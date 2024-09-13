@@ -1,9 +1,9 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { api } from "../../constance/API";
 import { Button, Card, Image, Space, Typography } from "antd";
-import { fomartPrice } from "../../ultis/ultis";
+import { fomartPrice } from "../../utils/utils";
 import { useDispatch } from "react-redux";
 import { addCart } from "../../redux/cartSlice";
 import ReactLoading from "react-loading";
@@ -25,7 +25,6 @@ export default function ProductDetailComponent() {
     const res = await axios(api + `/${id}`);
     setProduct(res.data.data);
   };
-  console.log(product);
 
   useEffect(() => {
     getProduct();
@@ -56,11 +55,13 @@ export default function ProductDetailComponent() {
                     "{product.description}"
                   </Paragraph>
                   <p>category: {product.category}</p>
-                  <a href="/">
-                    <Button style={{ background: "darkred", color: "#fff" }}>
-                      Go home
-                    </Button>
-                  </a>
+                  <Link
+                    to="/"
+                    className="btn text-white"
+                    style={{ background: "darkred" }}
+                  >
+                    Go home
+                  </Link>
                   <Title level={1}>$ {fomartPrice(product.price)}</Title>
                   <Button
                     size="large"

@@ -1,6 +1,6 @@
 import { Typography } from "antd";
 import React from "react";
-import { getTotal } from "../../ultis/ultis";
+import { getTotal } from "../../utils/utils";
 import { useDispatch } from "react-redux";
 import { setCart } from "../../redux/cartSlice";
 import { toast } from "react-toastify";

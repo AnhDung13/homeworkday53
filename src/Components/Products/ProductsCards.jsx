@@ -1,17 +1,14 @@
 import { Button, Card, Col, Flex, Image, Row, Typography } from "antd";
 import React from "react";
 import { cart } from "../../svg/icon";
-import { fomartPrice } from "../../ultis/ultis";
-import ReactLoading from "react-loading";
+import { fomartPrice } from "../../utils/utils";
 import { useDispatch, useSelector } from "react-redux";
 import { addCart } from "../../redux/cartSlice";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 export default function ProductsCards() {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const { products, isLoading } = useSelector((state) => state.products);
-
+  const { products } = useSelector((state) => state.products);
   const addToCart = (product) => {
     const tmp = { ...product };
     tmp.amount = 1;
@@ -24,47 +21,29 @@ export default function ProductsCards() {
   return (
     <>
       {products.map((product) => (
-        <div className="col-3 mb-4" key={product._id}>
-          <Card
-            style={{
-              textAlign: "center",
-              height: "100%",
-              position: "relative",
-            }}
-          >
-            <a>
-              <Image
-                src={product.image}
-                preview={false}
-                onClick={() => {
-                  navigate(`/product/${product._id}`);
-                }}
-              ></Image>
-            </a>
-            <Title
-              level={4}
-              style={{ fontWeight: "bold", margin: "20px 0 40px" }}
-            >
-              {product.name}
-            </Title>
-            <Flex
-              justify="space-around"
-              align="center"
-              style={{
-                position: "absolute",
-                bottom: 0,
-                left: 0,
-                width: "100%",
-              }}
-            >
-              <Title level={3} style={{ fontWeight: "bold" }}>
+        <div className="col-3 mb-4 position-relative" key={product._id}>
+          <Link to={`/product/${product._id}`}>
+            <Card style={{ textAlign: "center", height: "100%" }}>
+              <Image src={product.image} preview={false}></Image>
+              <Title level={4} className="fw-bold my-3">
+                {product.name}
+              </Title>
+
+              <Title level={3} className="fw-bold text-start">
                 ${fomartPrice(product.price)}
               </Title>
-              <button className="btn" onClick={() => addToCart(product)}>
-                {cart}
-              </button>
-            </Flex>
-          </Card>
+            </Card>
+          </Link>
+          <button
+            className="btn position-absolute"
+            style={{
+              bottom: "20px",
+              right: "20px",
+            }}
+            onClick={() => addToCart(product)}
+          >
+            {cart}
+          </button>
         </div>
       ))}
     </>
