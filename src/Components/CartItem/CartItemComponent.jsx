@@ -17,22 +17,6 @@ export default function CartItemComponent() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { cart } = useSelector((state) => state.cart);
-  const handleIncrease = (product) => {
-    dispatch(increaseAmount(product));
-  };
-  const handleDecrease = (product) => {
-    if (product.amount === 1) {
-      toast.warning("Bạn có chắc muốn xóa không? Chắc rồi thì nhấn vào đây", {
-        position: "top-center",
-        onClick: () => {
-          dispatch(removeCart(product));
-          toast.success("Xóa thành công !", {
-            position: "top-center",
-          });
-        },
-      });
-    } else dispatch(decreaseAmount(product));
-  };
   const handleRemove = (product) => {
     toast.warning("Bạn có chắc muốn xóa không? Chắc rồi thì nhấn vào đây", {
       position: "top-center",
@@ -44,6 +28,15 @@ export default function CartItemComponent() {
       },
     });
   };
+  const handleIncrease = (product) => {
+    dispatch(increaseAmount(product));
+  };
+  const handleDecrease = (product) => {
+    if (product.amount === 1) {
+      handleRemove(product);
+    } else dispatch(decreaseAmount(product));
+  };
+
   return (
     <>
       {cart.length === 0 ? (

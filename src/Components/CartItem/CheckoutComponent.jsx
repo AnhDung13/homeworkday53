@@ -4,6 +4,7 @@ import { getTotal } from "../../utils/utils";
 import { useDispatch } from "react-redux";
 import { setCart } from "../../redux/cartSlice";
 import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
 
 export default function CheckoutComponent({ cart }) {
   const { Title } = Typography;
@@ -22,11 +23,9 @@ export default function CheckoutComponent({ cart }) {
       <div className="container">
         <div className="row">
           <div className="col-3 p-0">
-            <a href="/">
-              <button className="btn btn-warning w-100 rounded-0">
-                Go home
-              </button>
-            </a>
+            <Link to="/" className="btn btn-warning w-100 rounded-0">
+              Go home
+            </Link>
           </div>
           <div className="col-9 p-0">
             <button
