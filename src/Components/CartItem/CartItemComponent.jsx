@@ -51,9 +51,11 @@ export default function CartItemComponent() {
           <Title level={1} className="text-center">
             Giỏ Hàng chưa có gì cả T~T
           </Title>
-          <Link to="/" className="btn btn-warning mx-auto">
-            Go home
-          </Link>
+          <div className="mx-auto" style={{ width: "fit-content" }}>
+            <Link to="/" className="btn btn-warning">
+              Go home
+            </Link>
+          </div>
         </>
       ) : (
         <>
