@@ -1,6 +1,6 @@
 export const fomartPrice = (num) => {
-  const formattedNum = num.toLocaleString("en-US");
-  return formattedNum;
+  const formattedPrice = num.toLocaleString("en-US");
+  return formattedPrice;
 };
 
 export const findIndex = (arr, payload) => {
