@@ -10,7 +10,7 @@ import {
 } from "../../redux/cartSlice";
 import { toast } from "react-toastify";
 import CheckoutComponent from "./CheckoutComponent";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function CartItemComponent() {
   const { Title } = Typography;
@@ -51,9 +51,9 @@ export default function CartItemComponent() {
           <Title level={1} className="text-center">
             Giỏ Hàng chưa có gì cả T~T
           </Title>
-          <a href="/">
-            <button className="btn btn-warning d-block mx-auto">Go home</button>
-          </a>
+          <Link to="/" className="btn btn-warning d-block mx-auto">
+            Go home
+          </Link>
         </>
       ) : (
         <>
