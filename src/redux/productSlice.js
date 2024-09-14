@@ -27,7 +27,7 @@ const productSlice = createSlice({
 
 export const fetchProducts = createAsyncThunk(
   "productSlice/fetchProducts",
-  async (page = 1) => {
+  async (page) => {
     try {
       const res = await axios.get(api, {
         params: {
