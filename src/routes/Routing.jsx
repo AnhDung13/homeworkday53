@@ -9,7 +9,7 @@ export default function Routing() {
         {routes.map((route, index) => (
           <Route key={index} path={route.path} element={route.component} />
         ))}
-        <Route path="*" element={<Navigate to="/products/page/1" replace />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>
   );
